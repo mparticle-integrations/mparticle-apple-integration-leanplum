@@ -46,13 +46,13 @@
     if (!self || !appId || !clientKey || !userIdField) {
         return nil;
     }
-    
+
     _configuration = configuration;
-    
+
     if (startImmediately) {
         [self start];
     }
-    
+
     return self;
 }
 
@@ -68,9 +68,9 @@
 
 - (void)start {
     static dispatch_once_t kitPredicate;
-    
+
     dispatch_once(&kitPredicate, ^{
-        
+
         if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
             LEANPLUM_USE_ADVERTISING_ID;
             [Leanplum setAppId:self.configuration[@"appId"] withDevelopmentKey:self.configuration[@"clientKey"]];
@@ -78,20 +78,20 @@
         else {
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
-        
+
         NSString *userId = nil;
         for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
             MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
             NSString *identityString = userIdentity[kMPUserIdentityIdKey];
-            
+
             if (identityType == [self preferredIdentityType]) {
                 userId = identityString;
                 break;
             }
         }
-        
+
         NSDictionary<NSString *, id> *attributes = self.userAttributes;
-        
+
         if (userId && attributes) {
             [Leanplum startWithUserId:userId userAttributes:attributes];
         }
@@ -104,12 +104,12 @@
         else {
             [Leanplum start];
         }
-        
+
         _started = YES;
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-            
+
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                                 object:nil
                                                               userInfo:userInfo];
@@ -126,7 +126,7 @@
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
     [Leanplum handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:^{
     }];
-    
+
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -154,7 +154,15 @@
     else {
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeUnavailable];
     }
-    
+
+    return execStatus;
+}
+
+- (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
+    [Leanplum handleActionWithIdentifier:nil forRemoteNotification:userInfo completionHandler:^{
+    }];
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 

@@ -17,7 +17,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@import mParticle_Apple_SDK;
+#if defined(__has_include) && __has_include(<mParticle_Apple_SDK/mParticle.h>)
+#import <mParticle_Apple_SDK/mParticle.h>
+#else
+#import "mParticle.h"
+#endif
 
 @interface MPKitLeanplum : NSObject <MPKitProtocol>
 

@@ -43,8 +43,7 @@
     NSString *appId = configuration[@"appId"];
     NSString *clientKey = configuration[@"clientKey"];
     NSString *userIdField = configuration[@"userIdField"];
-    NSString *deviceIdField = configuration[@"iosDeviceId"];
-    if (!self || !appId || !clientKey || !userIdField || !deviceIdField) {
+    if (!self || !appId || !clientKey || !userIdField) {
         return nil;
     }
 
@@ -71,14 +70,9 @@
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
-        BOOL isDevelopment = [MParticle sharedInstance].environment == MPEnvironmentDevelopment;
-        
-        if ([self.configuration[@"iosDeviceId"] isEqual:@"idfa"] ||
-            ([self.configuration[@"iosDeviceId"] isEqual:@"idfvForProdAndIdfaForDev"] && isDevelopment)) {
-            LEANPLUM_USE_ADVERTISING_ID;
-        }
 
-        if (isDevelopment) {
+        if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
+            LEANPLUM_USE_ADVERTISING_ID;
             [Leanplum setAppId:self.configuration[@"appId"] withDevelopmentKey:self.configuration[@"clientKey"]];
         }
         else {

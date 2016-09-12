@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'DefaultVersion' do |ss|
-        ss.ios.dependency 'Leanplum-iOS-SDK', '1.3.11'
+        ss.ios.dependency 'Leanplum-iOS-SDK', '1.4.0'
         s.subspec_common(ss)
     end
 

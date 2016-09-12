@@ -158,6 +158,71 @@
     return execStatus;
 }
 
+#pragma mark e-Commerce
+- (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
+    
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+    
+    if (commerceEvent.type == MPEventTypePurchase) {
+        NSMutableDictionary *baseProductAttributes = [[NSMutableDictionary alloc] init];
+        NSDictionary *transactionAttributes = [commerceEvent.transactionAttributes beautifiedDictionaryRepresentation];
+        
+        if (transactionAttributes) {
+            [baseProductAttributes addEntriesFromDictionary:transactionAttributes];
+        }
+        
+        NSDictionary *commerceEventAttributes = [commerceEvent beautifiedAttributes];
+        NSArray *keys = @[kMPExpCECheckoutOptions, kMPExpCECheckoutStep, kMPExpCEProductListName, kMPExpCEProductListSource];
+        
+        for (NSString *key in keys) {
+            if (commerceEventAttributes[key]) {
+                baseProductAttributes[key] = commerceEventAttributes[key];
+            }
+        }
+        
+        NSArray *products = commerceEvent.products;
+        NSMutableDictionary *properties;
+        
+        for (MPProduct *product in products) {
+            // Add relevant attributes from the commerce event
+            properties = [[NSMutableDictionary alloc] init];
+            if (baseProductAttributes.count > 0) {
+                [properties addEntriesFromDictionary:baseProductAttributes];
+            }
+            
+            // Add attributes from the product itself
+            NSDictionary *productDictionary = [product beautifiedDictionaryRepresentation];
+            if (productDictionary) {
+                [properties addEntriesFromDictionary:productDictionary];
+            }
+            
+            // Strips key/values already being passed, plus key/values initialized to default values
+            keys = @[kMPProductAffiliation, kMPExpProductCategory, kMPExpProductName];
+            [properties removeObjectsForKeys:keys];
+            
+            double value = [product.price doubleValue] * [product.quantity doubleValue];
+            
+            [Leanplum track:LP_PURCHASE_EVENT withValue:value andInfo:product.name andParameters:properties];
+            [execStatus incrementForwardCount];
+        }
+    } else {
+        NSArray *expandedInstructions = [commerceEvent expandedInstructions];
+        
+        for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
+            [self logEvent:commerceEventInstruction.event];
+            [execStatus incrementForwardCount];
+        }
+    }
+
+    return execStatus;
+}
+
+- (MPKitExecStatus *)logLTVIncrease:(double)increaseAmount event:(MPEvent *)event {
+    [Leanplum track:event.name withValue:increaseAmount andParameters:event.info];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+
 - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
     [Leanplum handleActionWithIdentifier:nil forRemoteNotification:userInfo completionHandler:^{
     }];
@@ -170,6 +235,12 @@
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
     [Leanplum track:event.name withParameters:event.info];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+
+- (nonnull MPKitExecStatus *)logScreen:(nonnull MPEvent *)event {
+    [Leanplum advanceTo:event.name withParameters:event.info];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }

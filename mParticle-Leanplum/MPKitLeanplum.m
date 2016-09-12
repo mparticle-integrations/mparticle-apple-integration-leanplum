@@ -242,6 +242,8 @@
 
 - (nonnull MPKitExecStatus *)logScreen:(nonnull MPEvent *)event {
     [Leanplum advanceTo:event.name withParameters:event.info];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 @end

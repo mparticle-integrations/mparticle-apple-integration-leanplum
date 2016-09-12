@@ -219,7 +219,7 @@
 }
 
 - (MPKitExecStatus *)logLTVIncrease:(double)increaseAmount event:(MPEvent *)event {
-    [Leanplum track:LP_PURCHASE_EVENT withValue:increaseAmount andInfo:event.name andParameters:event.info];
+    [Leanplum track:event.name withValue:increaseAmount andParameters:event.info];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }

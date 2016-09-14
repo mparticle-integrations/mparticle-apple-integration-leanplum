@@ -181,7 +181,6 @@
         }
         
         NSArray *products = commerceEvent.products;
-        NSString *currency = commerceEvent.currency ? : @"USD";
         NSMutableDictionary *properties;
         
         for (MPProduct *product in products) {

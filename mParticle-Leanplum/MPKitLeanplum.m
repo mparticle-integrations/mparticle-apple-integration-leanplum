@@ -17,12 +17,12 @@
 //
 
 #import "MPKitLeanplum.h"
-#import "mParticle.h"
-#import "MPKitRegister.h"
-#import "MPEnums.h"
-#import "MPIConstants.h"
 
+#if defined(__has_include) && __has_include(<Leanplum/Leanplum.h>)
+#import <Leanplum/Leanplum.h>
+#else
 #import "Leanplum.h"
+#endif
 
 @implementation MPKitLeanplum
 
@@ -81,8 +81,8 @@
 
         NSString *userId = nil;
         for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
-            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
-            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
+            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[@"n"] integerValue];
+            NSString *identityString = userIdentity[@"i"];
 
             if (identityType == [self preferredIdentityType]) {
                 userId = identityString;

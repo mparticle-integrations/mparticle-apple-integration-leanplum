@@ -24,6 +24,10 @@
 #import "Leanplum.h"
 #endif
 
+// Since MPIConstants.h isn't exposed via the mParticle framework
+static NSString * const kMPUserIdentityTypeKey = @"n";
+static NSString * const kMPUserIdentityIdKey = @"i";
+
 @implementation MPKitLeanplum
 
 + (NSNumber *)kitCode {
@@ -81,8 +85,8 @@
 
         NSString *userId = nil;
         for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
-            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[@"n"] integerValue];
-            NSString *identityString = userIdentity[@"i"];
+            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
+            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
 
             if (identityType == [self preferredIdentityType]) {
                 userId = identityString;

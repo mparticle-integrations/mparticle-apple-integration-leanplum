@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Leanplum/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.15.0'
-    s.ios.dependency 'Leanplum-iOS-SDK', '2.0.1'
+    s.ios.dependency 'Leanplum-iOS-SDK', '~> 2.0.2'
     s.ios.frameworks = 'CFNetwork', 'SystemConfiguration', 'Security', 'CoreLocation', 'StoreKit'
     s.ios.weak_frameworks = 'AdSupport'
     s.ios.pod_target_xcconfig = {

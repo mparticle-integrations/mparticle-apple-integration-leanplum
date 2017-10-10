@@ -35,29 +35,28 @@ static NSString * const kMPUserIdentityIdKey = @"i";
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Leanplum" className:@"MPKitLeanplum" startImmediately:NO];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Leanplum" className:@"MPKitLeanplum"];
     [MParticle registerExtension:kitRegister];
 }
 
 #pragma mark - MPKitInstanceProtocol methods
 
 #pragma mark Kit instance and lifecycle
-- (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
-    self = [super init];
+- (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
+    MPKitExecStatus *execStatus = nil;
+
     NSString *appId = configuration[@"appId"];
     NSString *clientKey = configuration[@"clientKey"];
     NSString *userIdField = configuration[@"userIdField"];
-    if (!self || !appId || !clientKey || !userIdField) {
-        return nil;
+    if (!appId || !clientKey || !userIdField) {
+        execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
+        return execStatus;
     }
 
     _configuration = configuration;
 
-    if (startImmediately) {
-        [self start];
-    }
-
-    return self;
+    execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 - (MPUserIdentity)preferredIdentityType {

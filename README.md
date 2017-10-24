@@ -5,6 +5,7 @@ A kit is an extension to the core [mParticle Apple SDK](https://github.com/mPart
 A kit takes care of initializing and forwarding information depending on what you've configured in [your app's dashboard](https://app.mparticle.com), so you just have to decide which kits you may use prior to submission to the App Store. You can easily include all of the kits, none of the kits, or individual kits – the choice is yours.
 
 [![CocoaPods compatible](http://img.shields.io/badge/CocoaPods-compatible-brightgreen.png)](https://cocoapods.org/?q=mparticle)
+[![Carthage compatible](http://img.shields.io/badge/Carthage-compatible-brightgreen.png)](https://github.com/Carthage/Carthage)
 
 
 ## Installation

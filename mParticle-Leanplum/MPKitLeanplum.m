@@ -59,21 +59,53 @@ static NSString * const kMPUserIdentityIdKey = @"i";
     return execStatus;
 }
 
-- (MPUserIdentity)preferredIdentityType {
+- (bool)isPreferredIdentityType: (MPUserIdentity) identityType {
     NSString *userIdField = self.configuration[@"userIdField"];
     if ([userIdField isEqual:@"customerId"]) {
-        return MPUserIdentityCustomerId;
+        return identityType == MPUserIdentityCustomerId;
+    } else if ([userIdField isEqual:@"email"]) {
+        return identityType == MPUserIdentityEmail;
+    } else {
+        return false;
     }
-    else {
-        return MPUserIdentityEmail;
+}
+
+- (NSString*) generateUserId:(NSDictionary *) configuration user:(MParticleUser*)user {
+    NSString *userIdField = configuration[@"userIdField"];
+    if ([userIdField isEqual:@"mpid"]) {
+        if (user != nil && user.userId != nil) {
+            return [user.userId stringValue];
+        } else {
+            return nil;
+        }
     }
+    
+    MPUserIdentity idType = 0;
+    if ([userIdField isEqual:@"customerId"]) {
+        idType = MPUserIdentityCustomerId;
+    } else if ([userIdField isEqual:@"email"]) {
+        idType = MPUserIdentityEmail;
+    } else {
+        return nil;
+    }
+    NSString *userId = nil;
+    for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+        MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
+        NSString *identityString = userIdentity[kMPUserIdentityIdKey];
+        
+        if (identityType == idType) {
+            userId = identityString;
+            break;
+        }
+    }
+    return userId;
 }
 
 - (void)start {
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserIdentified:) name:mParticleIdentityStateChangeListenerNotification object:nil];
         if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
             LEANPLUM_USE_ADVERTISING_ID;
             [Leanplum setAppId:self.configuration[@"appId"] withDevelopmentKey:self.configuration[@"clientKey"]];
@@ -82,16 +114,8 @@ static NSString * const kMPUserIdentityIdKey = @"i";
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
 
-        NSString *userId = nil;
-        for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
-            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
-            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
-
-            if (identityType == [self preferredIdentityType]) {
-                userId = identityString;
-                break;
-            }
-        }
+        NSString *userId = [self generateUserId:self.configuration
+                                           user:[[MParticle sharedInstance].identity currentUser]];
 
         NSDictionary<NSString *, id> *attributes = self.userAttributes;
 
@@ -124,6 +148,14 @@ static NSString * const kMPUserIdentityIdKey = @"i";
     return nil;
 }
 
+- (void)onUserIdentified:(NSNotification*) notification {
+    MParticleUser *user = [notification.userInfo objectForKey:mParticleUserKey];
+    NSString *userId = [self generateUserId:self.configuration user:user];
+    if (userId != nil) {
+        [Leanplum setUserId:userId];
+    }
+}
+
 
 #pragma mark Application
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
@@ -150,7 +182,7 @@ static NSString * const kMPUserIdentityIdKey = @"i";
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
     MPKitExecStatus *execStatus;
-    if (identityType == [self preferredIdentityType]) {
+    if ([self isPreferredIdentityType:identityType]) {
         [Leanplum setUserId:identityString];
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     }

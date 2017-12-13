@@ -29,8 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBFA61961F9EC86C003A3ED8 /* Leanplum.framework in Frameworks */,
 				DB94017A1CB70C58007ABB18 /* mParticle_Apple_SDK.framework in Frameworks */,
+				DBFA61961F9EC86C003A3ED8 /* Leanplum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

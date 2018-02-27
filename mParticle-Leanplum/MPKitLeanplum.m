@@ -28,6 +28,10 @@
 static NSString * const kMPUserIdentityTypeKey = @"n";
 static NSString * const kMPUserIdentityIdKey = @"i";
 
+// Per Leanplum's docs - you must send email as a user attribute for email campaigns to function.
+// https://support.leanplum.com/hc/en-us/articles/217075086-Setup-Email-Messaging#verify-leanplum-has-your-users'-email-addresses
+static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
+
 @implementation MPKitLeanplum
 
 + (NSNumber *)kitCode {
@@ -116,9 +120,25 @@ static NSString * const kMPUserIdentityIdKey = @"i";
 
         NSString *userId = [self generateUserId:self.configuration
                                            user:[[MParticle sharedInstance].identity currentUser]];
-
+        
+        NSString *email = nil;
+        for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
+            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
+            
+            if (identityType == MPUserIdentityEmail) {
+                email = identityString;
+                break;
+            }
+        }
+        
         NSDictionary<NSString *, id> *attributes = self.userAttributes;
-
+        if (email != nil) {
+            if (attributes == nil) {
+                attributes = [NSMutableDictionary dictionary];
+            }
+            [attributes setValue:email forKey:kMPLeanplumEmailUserAttributeKey];
+        }
         if (userId && attributes) {
             [Leanplum startWithUserId:userId userAttributes:attributes];
         }
@@ -181,6 +201,9 @@ static NSString * const kMPUserIdentityIdKey = @"i";
 }
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
+    if (identityType == MPUserIdentityEmail) {
+        [self setUserAttribute:kMPLeanplumEmailUserAttributeKey value:identityString];
+    }
     MPKitExecStatus *execStatus;
     if ([self isPreferredIdentityType:identityType]) {
         [Leanplum setUserId:identityString];

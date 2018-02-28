@@ -173,6 +173,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     NSString *userId = [self generateUserId:self.configuration user:user];
     if (userId != nil) {
         [Leanplum setUserId:userId];
+        [Leanplum forceContentUpdate];
     }
 }
 

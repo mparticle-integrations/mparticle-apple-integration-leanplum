@@ -77,7 +77,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 - (NSString*) generateUserId:(NSDictionary *) configuration user:(MParticleUser*)user {
     NSString *userIdField = configuration[@"userIdField"];
     if ([userIdField isEqual:@"mpid"]) {
-        if (user != nil && user.userId != nil) {
+        if (user != nil && user.userId != nil && user.userId != 0) {
             return [user.userId stringValue];
         } else {
             return nil;

@@ -74,7 +74,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     }
 }
 
-- (NSString*) generateUserId:(NSDictionary *) configuration user:(MParticleUser*)user {
+- (NSString*) generateUserId:(NSDictionary *) configuration user:(FilteredMParticleUser*)user {
     NSString *userIdField = configuration[@"userIdField"];
     if ([userIdField isEqual:@"mpid"]) {
         if (user != nil && user.userId != nil && user.userId != 0) {
@@ -93,7 +93,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         return nil;
     }
     NSString *userId = nil;
-    for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+    for (NSDictionary<NSString *, id> *userIdentity in user.userIdentities) {
         MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
         NSString *identityString = userIdentity[kMPUserIdentityIdKey];
         
@@ -118,11 +118,12 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
 
+        FilteredMParticleUser *user = [self currentUser];
         NSString *userId = [self generateUserId:self.configuration
-                                           user:[[MParticle sharedInstance].identity currentUser]];
+                                           user:user];
         
         NSString *email = nil;
-        for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+        for (NSDictionary<NSString *, id> *userIdentity in user.userIdentities) {
             MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
             NSString *identityString = userIdentity[kMPUserIdentityIdKey];
             
@@ -132,7 +133,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
             }
         }
         
-        NSDictionary<NSString *, id> *attributes = self.userAttributes;
+        NSDictionary<NSString *, id> *attributes = user.userAttributes;
         if (email != nil) {
             if (attributes == nil) {
                 attributes = [NSMutableDictionary dictionary];
@@ -168,12 +169,23 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     return nil;
 }
 
-- (void)onUserIdentified:(NSNotification*) notification {
-    MParticleUser *user = [notification.userInfo objectForKey:mParticleUserKey];
+- (MPKitAPI *)kitApi {
+    if (_kitApi == nil) {
+        _kitApi = [[MPKitAPI alloc] init];
+    }
+
+    return _kitApi;
+}
+
+- (MPKitExecStatus *)onUserIdentified:(NSNotification*) notification {
+    FilteredMParticleUser *user = [self currentUser];
     NSString *userId = [self generateUserId:self.configuration user:user];
     if (userId != nil) {
         [Leanplum setUserId:userId];
         [Leanplum forceContentUpdate];
+        return [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    } else {
+        return [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeFail];
     }
 }
 
@@ -302,6 +314,13 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     [Leanplum advanceTo:event.name withParameters:event.info];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
+}
+
+
+#pragma helper methods
+
+- (FilteredMParticleUser *)currentUser {
+    return [[self kitApi] getCurrentUserWithKit:self];
 }
 
 @end

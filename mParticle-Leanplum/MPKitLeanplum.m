@@ -24,10 +24,6 @@
 #import "Leanplum.h"
 #endif
 
-// Since MPIConstants.h isn't exposed via the mParticle framework
-static NSString * const kMPUserIdentityTypeKey = @"n";
-static NSString * const kMPUserIdentityIdKey = @"i";
-
 // Per Leanplum's docs - you must send email as a user attribute for email campaigns to function.
 // https://support.leanplum.com/hc/en-us/articles/217075086-Setup-Email-Messaging#verify-leanplum-has-your-users'-email-addresses
 static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
@@ -48,7 +44,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
     MPKitExecStatus *execStatus = nil;
-
+    
     NSString *appId = configuration[@"appId"];
     NSString *clientKey = configuration[@"clientKey"];
     NSString *userIdField = configuration[@"userIdField"];
@@ -56,9 +52,9 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
         return execStatus;
     }
-
+    
     _configuration = configuration;
-
+    
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -92,22 +88,13 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     } else {
         return nil;
     }
-    NSString *userId = nil;
-    for (NSDictionary<NSString *, id> *userIdentity in user.userIdentities) {
-        MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
-        NSString *identityString = userIdentity[kMPUserIdentityIdKey];
-        
-        if (identityType == idType) {
-            userId = identityString;
-            break;
-        }
-    }
-    return userId;
+    
+    return [user.userIdentities objectForKey:[NSNumber numberWithInt:idType]];
 }
 
 - (void)start {
     static dispatch_once_t kitPredicate;
-
+    
     dispatch_once(&kitPredicate, ^{
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserIdentified:) name:mParticleIdentityStateChangeListenerNotification object:nil];
         if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
@@ -117,21 +104,12 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         else {
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
-
+        
         FilteredMParticleUser *user = [self currentUser];
         NSString *userId = [self generateUserId:self.configuration
                                            user:user];
         
-        NSString *email = nil;
-        for (NSDictionary<NSString *, id> *userIdentity in user.userIdentities) {
-            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
-            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
-            
-            if (identityType == MPUserIdentityEmail) {
-                email = identityString;
-                break;
-            }
-        }
+        NSString *email = [user.userIdentities objectForKey:[NSNumber numberWithInt:MPUserIdentityEmail]];
         
         NSDictionary<NSString *, id> *attributes = user.userAttributes;
         if (email != nil) {
@@ -152,12 +130,12 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         else {
             [Leanplum start];
         }
-
+        
         _started = YES;
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                                 object:nil
                                                               userInfo:userInfo];
@@ -173,7 +151,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     if (_kitApi == nil) {
         _kitApi = [[MPKitAPI alloc] init];
     }
-
+    
     return _kitApi;
 }
 
@@ -194,7 +172,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
     [Leanplum handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:^{
     }];
-
+    
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -225,7 +203,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     else {
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeUnavailable];
     }
-
+    
     return execStatus;
 }
 
@@ -284,7 +262,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
             [execStatus incrementForwardCount];
         }
     }
-
+    
     return execStatus;
 }
 
@@ -297,7 +275,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
     [Leanplum handleActionWithIdentifier:nil forRemoteNotification:userInfo completionHandler:^{
     }];
-
+    
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }

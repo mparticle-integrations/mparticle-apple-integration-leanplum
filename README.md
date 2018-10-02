@@ -10,6 +10,10 @@ A kit takes care of initializing and forwarding information depending on what yo
 
 ## Installation
 
+### Swizzling
+
+The Leanplum SDK uses method swizzling that breaks the mParticle UIApplication delegate proxy. To resolve this please disable the UIApplication delegate proxy and manually forward the proxy methods to the mParticle SDK. Please refer to the [AppDelegate Proxy Docs](https://docs.mparticle.com/developers/sdk/ios/initialize-the-sdk#appdelegate-proxy) for a list of the methods to forward.
+
 Please refer to installation instructions in the core mParticle Apple SDK [README](https://github.com/mParticle/mparticle-apple-sdk#get-the-sdk), or check out our [SDK Documentation](http://docs.mparticle.com/#mobile-sdk-guide) site to learn more.
 
 
@@ -26,3 +30,4 @@ Questions? Give us a shout at <support@mparticle.com>
 ## License
 
 This mParticle Apple Kit is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the LICENSE file for more info.
+

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-Leanplum"
-    s.version          = "7.7.5"
+    s.version          = "7.8.0"
     s.summary          = "Leanplum integration for mParticle"
 
     s.description      = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Leanplum/*.{h,m,mm}'
-    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 7.7.0'
+    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 7.8.0'
     s.ios.dependency 'Leanplum-iOS-SDK', '~> 2.0.2'
     s.ios.frameworks = 'CFNetwork', 'SystemConfiguration', 'Security', 'CoreLocation', 'StoreKit'
     s.ios.weak_frameworks = 'AdSupport'

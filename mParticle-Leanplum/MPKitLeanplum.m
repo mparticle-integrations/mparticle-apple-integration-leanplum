@@ -110,13 +110,9 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
             deviceIdType = @"";
         }
         if ([deviceIdType isEqualToString:@"idfa"]) {
-            LEANPLUM_USE_ADVERTISING_ID
-        } else if ([deviceIdType isEqualToString:@"idfv"]) {
-            [Leanplum setDeviceId:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+            LEANPLUM_USE_ADVERTISING_ID;
         } else if ([deviceIdType isEqualToString:@"das"]) {
             [Leanplum setDeviceId:[MParticle sharedInstance].identity.deviceApplicationStamp];
-        } else if ([deviceIdType isEqualToString:@"leanplumDefault"]) {
-            //do nothing
         }
         
         FilteredMParticleUser *user = [self currentUser];

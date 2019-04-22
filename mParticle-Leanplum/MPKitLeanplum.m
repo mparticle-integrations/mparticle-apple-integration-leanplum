@@ -177,7 +177,6 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     }
 }
 
-
 #pragma mark Application
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
     [Leanplum handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:^{
@@ -201,17 +200,32 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     return execStatus;
 }
 
-- (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-    if (identityType == MPUserIdentityEmail) {
-        [self setUserAttribute:kMPLeanplumEmailUserAttributeKey value:identityString];
-    }
-    MPKitExecStatus *execStatus;
-    if ([self isPreferredIdentityType:identityType]) {
-        [Leanplum setUserId:identityString];
-        execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
-    }
-    else {
+- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    return [self onIdentityComplete:user request:request];
+}
+
+- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    return [self onIdentityComplete:user request:request];
+}
+
+- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    return [self onIdentityComplete:user request:request];
+}
+
+- (MPKitExecStatus *)onIdentityComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
+    
+    NSString *userIdField = self.configuration[@"userIdField"];
+    if ([userIdField isEqual:@"customerId"] && request.customerId) {
+        [Leanplum setUserId:request.customerId];
+    } else if ([userIdField isEqual:@"email"] && request.email) {
+        [Leanplum setUserId:request.email];
+    } else {
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeUnavailable];
+    }
+    
+    if (request.email) {
+        [self setUserAttribute:kMPLeanplumEmailUserAttributeKey value:request.email];
     }
     
     return execStatus;
@@ -303,7 +317,6 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
-
 
 #pragma helper methods
 

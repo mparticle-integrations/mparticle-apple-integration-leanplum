@@ -13,7 +13,7 @@ This repository contains the [Leanplum](https://www.leanplum.com) integration fo
     OR
 
     ```
-    github 'mparticle-integrations/mparticle-apple-integration-leanplum' ~> 7.0
+    github "mparticle-integrations/mparticle-apple-integration-leanplum" ~> 7.0
     ```
 
 2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Leanplum }"` in your Xcode console 

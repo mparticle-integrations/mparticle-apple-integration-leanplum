@@ -294,7 +294,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     } else if ([event isKindOfClass:[MPCommerceEvent class]]) {
         return [self routeCommerceEvent:(MPCommerceEvent *)event];
     } else {
-        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppsFlyer) returnCode:MPKitReturnCodeUnavailable];
+        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeUnavailable];
     }
 }
 

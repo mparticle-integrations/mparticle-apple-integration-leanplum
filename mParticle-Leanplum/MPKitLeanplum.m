@@ -71,7 +71,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         return nil;
     }
     
-    return [user.userIdentities objectForKey:[NSNumber numberWithInt:idType]];
+    return [user.userIdentities objectForKey:[NSNumber numberWithInt:(int)idType]];
 }
 
 - (void)start {
@@ -214,7 +214,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 }
 
 #pragma mark e-Commerce
-- (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
+- (MPKitExecStatus *)routeCommerceEvent:(MPCommerceEvent *)commerceEvent {
     
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess forwardCount:0];
     
@@ -264,7 +264,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
         
         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-            [self logEvent:commerceEventInstruction.event];
+            [self logBaseEvent:commerceEventInstruction.event];
             [execStatus incrementForwardCount];
         }
     }
@@ -273,7 +273,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 }
 
 - (MPKitExecStatus *)logLTVIncrease:(double)increaseAmount event:(MPEvent *)event {
-    [Leanplum track:event.name withValue:increaseAmount andParameters:event.info];
+    [Leanplum track:event.name withValue:increaseAmount andParameters:event.customAttributes];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -288,14 +288,24 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 
 #pragma mark Events
 
-- (MPKitExecStatus *)logEvent:(MPEvent *)event {
-    [Leanplum track:event.name withParameters:event.info];
+- (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {
+    if ([event isKindOfClass:[MPEvent class]]) {
+        return [self routeEvent:(MPEvent *)event];
+    } else if ([event isKindOfClass:[MPCommerceEvent class]]) {
+        return [self routeCommerceEvent:(MPCommerceEvent *)event];
+    } else {
+        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeUnavailable];
+    }
+}
+
+- (MPKitExecStatus *)routeEvent:(MPEvent *)event {
+    [Leanplum track:event.name withParameters:event.customAttributes];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (nonnull MPKitExecStatus *)logScreen:(nonnull MPEvent *)event {
-    [Leanplum advanceTo:event.name withParameters:event.info];
+    [Leanplum advanceTo:event.name withParameters:event.customAttributes];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }

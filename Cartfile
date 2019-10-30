@@ -1,2 +1,2 @@
-github "leanplum/leanplum-ios-sdk" ~> 2.0
-github "mparticle/mparticle-apple-sdk" ~> 7.12.0
+github "leanplum/leanplum-ios-sdk" ~> 2.6
+github "mparticle/mparticle-apple-sdk" ~> 7.12

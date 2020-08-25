@@ -65,3 +65,5 @@ fastlane/test_output
 **/Podfile.lock
 **/*.xcworkspace
 Cartfile.resolved
+**/*.DS_Store
+*.DS_Store

@@ -279,8 +279,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 }
 
 - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-    [Leanplum handleActionWithIdentifier:nil forRemoteNotification:userInfo completionHandler:^{
-    }];
+    [Leanplum didReceiveRemoteNotification:userInfo];
     
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];
     return execStatus;

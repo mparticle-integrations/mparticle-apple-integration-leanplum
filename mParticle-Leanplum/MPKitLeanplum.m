@@ -83,10 +83,8 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         NSString *advertiserId = identities[@(MPIdentityIOSAdvertiserId)];
 
         if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
-            [Leanplum setDeviceId:advertiserId];
             [Leanplum setAppId:self.configuration[@"appId"] withDevelopmentKey:self.configuration[@"clientKey"]];
-        }
-        else {
+        } else {
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
         

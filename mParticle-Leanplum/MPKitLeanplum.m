@@ -79,11 +79,12 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     
     dispatch_once(&kitPredicate, ^{
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserIdentified:) name:mParticleIdentityStateChangeListenerNotification object:nil];
+        NSDictionary *identities = [[self currentUser] userIdentities];
+        NSString *advertiserId = identities[@(MPIdentityIOSAdvertiserId)];
+
         if ([MParticle sharedInstance].environment == MPEnvironmentDevelopment) {
-            LEANPLUM_USE_ADVERTISING_ID;
             [Leanplum setAppId:self.configuration[@"appId"] withDevelopmentKey:self.configuration[@"clientKey"]];
-        }
-        else {
+        } else {
             [Leanplum setAppId:self.configuration[@"appId"] withProductionKey:self.configuration[@"clientKey"]];
         }
         
@@ -91,8 +92,8 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         if (deviceIdType == nil) {
             deviceIdType = @"";
         }
-        if ([deviceIdType isEqualToString:@"idfa"]) {
-            LEANPLUM_USE_ADVERTISING_ID;
+        if ([deviceIdType isEqualToString:@"idfa"] && advertiserId != nil) {
+            [Leanplum setDeviceId:advertiserId];
         } else if ([deviceIdType isEqualToString:@"das"]) {
             [Leanplum setDeviceId:[MParticle sharedInstance].identity.deviceApplicationStamp];
         }
@@ -161,7 +162,7 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
 
 #pragma mark Application
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
-    [Leanplum handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:^{
+    [Leanplum handleActionWithIdentifier:identifier forRemoteNotification:userInfo completionHandler:^(LeanplumUIBackgroundFetchResult result){
     }];
     
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceLeanplum) returnCode:MPKitReturnCodeSuccess];

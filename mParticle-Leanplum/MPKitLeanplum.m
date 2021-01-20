@@ -123,16 +123,16 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
         else {
             [Leanplum start];
         }
+    });
+    
+    self->_started = YES;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
         
-        self->_started = YES;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
-                                                                object:nil
-                                                              userInfo:userInfo];
-        });
+        [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
+                                                            object:nil
+                                                          userInfo:userInfo];
     });
 }
 

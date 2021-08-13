@@ -286,6 +286,15 @@ static NSString * const kMPLeanplumEmailUserAttributeKey = @"email";
     return execStatus;
 }
 
+- (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
+#if TARGET_OS_IOS == 1
+    [Leanplum didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+#endif
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+
 #pragma mark Events
 
 - (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-Leanplum"
-    s.version          = "8.0.3"
+    s.version          = "8.2.0"
     s.summary          = "Leanplum integration for mParticle"
 
     s.description      = <<-DESC
@@ -16,14 +16,11 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "9.0"
     s.ios.source_files      = 'mParticle-Leanplum/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 8.0'
-    s.ios.dependency 'Leanplum-iOS-SDK', '~> 3.1'
+    s.ios.dependency 'Leanplum-iOS-SDK', '~> 4.1'
     s.ios.frameworks = 'CFNetwork', 'SystemConfiguration', 'Security', 'CoreLocation', 'StoreKit'
     s.ios.weak_frameworks = 'AdSupport'
     s.ios.pod_target_xcconfig = {
         'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/Leanplum-iOS-SDK/**',
-        'OTHER_LDFLAGS' => '$(inherited) -framework "Leanplum"',
-        'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+        'OTHER_LDFLAGS' => '$(inherited) -framework "Leanplum"'
     }
-    s.ios.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-
 end

@@ -7,21 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		537FB0E0284AB1BF0097D765 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537FB0DF284AB1BF0097D765 /* File.swift */; };
+		53F9F9A7283C1DEB0044C8FC /* Leanplum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F9F9A6283C1DEB0044C8FC /* Leanplum.framework */; };
 		DB7E05A61CB819D300967FDF /* MPKitLeanplum.h in Headers */ = {isa = PBXBuildFile; fileRef = DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB7E05A71CB819D300967FDF /* MPKitLeanplum.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */; };
 		DB9401701CB703F2007ABB18 /* mParticle_Leanplum.h in Headers */ = {isa = PBXBuildFile; fileRef = DB94016F1CB703F2007ABB18 /* mParticle_Leanplum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB94017A1CB70C58007ABB18 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */; };
-		DBFA61961F9EC86C003A3ED8 /* Leanplum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA61951F9EC86C003A3ED8 /* Leanplum.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		537FB0DF284AB1BF0097D765 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		53F9F9A6283C1DEB0044C8FC /* Leanplum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Leanplum.framework; path = Carthage/Build/iOS/Static/Leanplum.framework; sourceTree = "<group>"; };
 		DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitLeanplum.h; sourceTree = "<group>"; };
 		DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitLeanplum.m; sourceTree = "<group>"; };
 		DB94016C1CB703F2007ABB18 /* mParticle_Leanplum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Leanplum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB94016F1CB703F2007ABB18 /* mParticle_Leanplum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Leanplum.h; sourceTree = "<group>"; };
 		DB9401711CB703F2007ABB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
-		DBFA61951F9EC86C003A3ED8 /* Leanplum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Leanplum.framework; path = Carthage/Build/iOS/Leanplum.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,7 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB94017A1CB70C58007ABB18 /* mParticle_Apple_SDK.framework in Frameworks */,
-				DBFA61961F9EC86C003A3ED8 /* Leanplum.framework in Frameworks */,
+				53F9F9A7283C1DEB0044C8FC /* Leanplum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +63,7 @@
 				DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */,
 				DB94016F1CB703F2007ABB18 /* mParticle_Leanplum.h */,
 				DB9401711CB703F2007ABB18 /* Info.plist */,
+				537FB0DF284AB1BF0097D765 /* File.swift */,
 			);
 			path = "mParticle-Leanplum";
 			sourceTree = "<group>";
@@ -68,7 +71,7 @@
 		DBBE32AB1E09CA41008DDECB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBFA61951F9EC86C003A3ED8 /* Leanplum.framework */,
+				53F9F9A6283C1DEB0044C8FC /* Leanplum.framework */,
 				DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */,
 			);
 			name = Frameworks;
@@ -119,6 +122,7 @@
 					DB94016B1CB703F2007ABB18 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Q948K5LXGZ;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -127,6 +131,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = DB9401621CB703F2007ABB18;
@@ -155,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB7E05A71CB819D300967FDF /* MPKitLeanplum.m in Sources */,
+				537FB0E0284AB1BF0097D765 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +265,7 @@
 		DB9401751CB703F2007ABB18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -267,20 +274,24 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "mParticle-Leanplum/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Leanplum";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		DB9401761CB703F2007ABB18 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -289,14 +300,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "mParticle-Leanplum/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Leanplum";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

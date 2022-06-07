@@ -15,7 +15,7 @@ let package = Package(
                .upToNextMajor(from: "8.7.0")),
       .package(name: "Leanplum",
                url: "https://github.com/leanplum/leanplum-ios-sdk",
-               .upToNextMajor(from: "3.1.0")),
+               .upToNextMajor(from: "4.1.0")),
     ],
     targets: [
         .target(

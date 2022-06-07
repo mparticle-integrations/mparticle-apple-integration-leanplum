@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5339174B284FEE0300972482 /* Leanplum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53391749284FEDCF00972482 /* Leanplum.framework */; };
+		5339174C284FEE0300972482 /* Leanplum.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53391749284FEDCF00972482 /* Leanplum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBFA61E21F9ECB8F003A3ED8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA61E11F9ECB8F003A3ED8 /* AppDelegate.swift */; };
 		DBFA61E41F9ECB8F003A3ED8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA61E31F9ECB8F003A3ED8 /* ViewController.swift */; };
 		DBFA61E71F9ECB8F003A3ED8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFA61E51F9ECB8F003A3ED8 /* Main.storyboard */; };
@@ -14,8 +16,6 @@
 		DBFA61EC1F9ECB8F003A3ED8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFA61EA1F9ECB8F003A3ED8 /* LaunchScreen.storyboard */; };
 		DBFA61F71F9ECB90003A3ED8 /* mParticle_Leanplum_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA61F61F9ECB90003A3ED8 /* mParticle_Leanplum_ExampleTests.swift */; };
 		DBFA62021F9ECB90003A3ED8 /* mParticle_Leanplum_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFA62011F9ECB90003A3ED8 /* mParticle_Leanplum_ExampleUITests.swift */; };
-		DBFA62171F9ECE4C003A3ED8 /* Leanplum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA62111F9ECE42003A3ED8 /* Leanplum.framework */; };
-		DBFA62181F9ECE4C003A3ED8 /* Leanplum.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA62111F9ECE42003A3ED8 /* Leanplum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBFA62191F9ECE4C003A3ED8 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA62131F9ECE42003A3ED8 /* mParticle_Apple_SDK.framework */; };
 		DBFA621A1F9ECE4C003A3ED8 /* mParticle_Apple_SDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA62131F9ECE42003A3ED8 /* mParticle_Apple_SDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBFA621B1F9ECE4C003A3ED8 /* mParticle_Leanplum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBFA62121F9ECE42003A3ED8 /* mParticle_Leanplum.framework */; };
@@ -47,8 +47,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DBFA621C1F9ECE4C003A3ED8 /* mParticle_Leanplum.framework in Embed Frameworks */,
+				5339174C284FEE0300972482 /* Leanplum.framework in Embed Frameworks */,
 				DBFA621A1F9ECE4C003A3ED8 /* mParticle_Apple_SDK.framework in Embed Frameworks */,
-				DBFA62181F9ECE4C003A3ED8 /* Leanplum.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		53391749284FEDCF00972482 /* Leanplum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Leanplum.framework; path = Carthage/Build/iOS/Static/Leanplum.framework; sourceTree = "<group>"; };
 		DBFA61DE1F9ECB8F003A3ED8 /* mParticle-Leanplum-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mParticle-Leanplum-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBFA61E11F9ECB8F003A3ED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBFA61E31F9ECB8F003A3ED8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		DBFA61FD1F9ECB90003A3ED8 /* mParticle-Leanplum-ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mParticle-Leanplum-ExampleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBFA62011F9ECB90003A3ED8 /* mParticle_Leanplum_ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mParticle_Leanplum_ExampleUITests.swift; sourceTree = "<group>"; };
 		DBFA62031F9ECB90003A3ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBFA62111F9ECE42003A3ED8 /* Leanplum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Leanplum.framework; path = Carthage/Build/iOS/Leanplum.framework; sourceTree = "<group>"; };
 		DBFA62121F9ECE42003A3ED8 /* mParticle_Leanplum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Leanplum.framework; path = Carthage/Build/iOS/mParticle_Leanplum.framework; sourceTree = "<group>"; };
 		DBFA62131F9ECE42003A3ED8 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,8 +80,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBFA621B1F9ECE4C003A3ED8 /* mParticle_Leanplum.framework in Frameworks */,
+				5339174B284FEE0300972482 /* Leanplum.framework in Frameworks */,
 				DBFA62191F9ECE4C003A3ED8 /* mParticle_Apple_SDK.framework in Frameworks */,
-				DBFA62171F9ECE4C003A3ED8 /* Leanplum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,7 @@
 		DBFA62101F9ECD49003A3ED8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBFA62111F9ECE42003A3ED8 /* Leanplum.framework */,
+				53391749284FEDCF00972482 /* Leanplum.framework */,
 				DBFA62131F9ECE42003A3ED8 /* mParticle_Apple_SDK.framework */,
 				DBFA62121F9ECE42003A3ED8 /* mParticle_Leanplum.framework */,
 			);
@@ -175,7 +175,6 @@
 				DBFA61DB1F9ECB8F003A3ED8 /* Frameworks */,
 				DBFA61DC1F9ECB8F003A3ED8 /* Resources */,
 				DBFA621D1F9ECE4C003A3ED8 /* Embed Frameworks */,
-				DBFA621E1F9ECE7E003A3ED8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -295,28 +294,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		DBFA621E1F9ECE7E003A3ED8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Leanplum.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/mParticle_Leanplum.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/mParticle_Apple_SDK.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Leanplum.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/mParticle_Leanplum.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/mParticle_Apple_SDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		DBFA61DA1F9ECB8F003A3ED8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -432,6 +409,8 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -481,7 +460,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
@@ -494,12 +474,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "mParticle-Leanplum-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -513,12 +493,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "mParticle-Leanplum-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -534,7 +514,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-ExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mParticle-Leanplum-Example.app/mParticle-Leanplum-Example";
 			};
@@ -551,7 +530,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-ExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mParticle-Leanplum-Example.app/mParticle-Leanplum-Example";
 			};
@@ -567,7 +545,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "mParticle-Leanplum-Example";
 			};
@@ -583,7 +560,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.example.kit.leanplum.mParticle-Leanplum-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "mParticle-Leanplum-Example";
 			};

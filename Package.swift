@@ -22,6 +22,7 @@ let package = Package(
             name: "mParticle-Leanplum",
             dependencies: ["mParticle-Apple-SDK","Leanplum"],
             path: "mParticle-Leanplum",
+            exclude: ["File.swift"],
             publicHeadersPath: "."),
     ]
 )

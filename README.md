@@ -4,16 +4,16 @@ This repository contains the [Leanplum](https://www.leanplum.com) integration fo
 
 ### Adding the integration
 
-1. Add the kit dependency to your app's Podfile or Cartfile:
+1. Add the kit dependency via SPM or add to your app's Podfile or Cartfile:
 
     ```
-    pod 'mParticle-Leanplum', '~> 7.0'
+    pod 'mParticle-Leanplum', '~> 8.0'
     ```
 
     OR
 
     ```
-    github "mparticle-integrations/mparticle-apple-integration-leanplum" ~> 7.0
+    github "mparticle-integrations/mparticle-apple-integration-leanplum" ~> 8.0
     ```
 
 2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Leanplum }"` in your Xcode console 

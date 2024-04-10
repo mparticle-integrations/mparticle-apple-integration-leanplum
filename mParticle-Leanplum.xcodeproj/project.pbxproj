@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		535B24AC285798AF003141C8 /* Leanplum.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535B24AB285798AF003141C8 /* Leanplum.xcframework */; };
 		535B24AE285798B5003141C8 /* mParticle_Apple_SDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535B24AD285798B5003141C8 /* mParticle_Apple_SDK.xcframework */; };
 		537FB0E0284AB1BF0097D765 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537FB0DF284AB1BF0097D765 /* File.swift */; };
+		53E9ACCB2BBF0E540062A03A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 53E9ACCA2BBF0E540062A03A /* PrivacyInfo.xcprivacy */; };
 		DB7E05A61CB819D300967FDF /* MPKitLeanplum.h in Headers */ = {isa = PBXBuildFile; fileRef = DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB7E05A71CB819D300967FDF /* MPKitLeanplum.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */; };
 		DB9401701CB703F2007ABB18 /* mParticle_Leanplum.h in Headers */ = {isa = PBXBuildFile; fileRef = DB94016F1CB703F2007ABB18 /* mParticle_Leanplum.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,6 +20,7 @@
 		535B24AB285798AF003141C8 /* Leanplum.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Leanplum.xcframework; path = Carthage/Build/Leanplum.xcframework; sourceTree = "<group>"; };
 		535B24AD285798B5003141C8 /* mParticle_Apple_SDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mParticle_Apple_SDK.xcframework; path = Carthage/Build/mParticle_Apple_SDK.xcframework; sourceTree = "<group>"; };
 		537FB0DF284AB1BF0097D765 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		53E9ACCA2BBF0E540062A03A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitLeanplum.h; sourceTree = "<group>"; };
 		DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitLeanplum.m; sourceTree = "<group>"; };
 		DB94016C1CB703F2007ABB18 /* mParticle_Leanplum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Leanplum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 				DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */,
 				DB7E05A51CB819D300967FDF /* MPKitLeanplum.m */,
 				DB94016F1CB703F2007ABB18 /* mParticle_Leanplum.h */,
+				53E9ACCA2BBF0E540062A03A /* PrivacyInfo.xcprivacy */,
 				DB9401711CB703F2007ABB18 /* Info.plist */,
 				537FB0DF284AB1BF0097D765 /* File.swift */,
 			);
@@ -149,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53E9ACCB2BBF0E540062A03A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

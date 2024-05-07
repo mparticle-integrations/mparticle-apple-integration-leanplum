@@ -1,3 +1,10 @@
+# [8.5.0](https://github.com/mparticle-integrations/mparticle-apple-integration-leanplum/compare/v8.4.0...v8.5.0) (2024-05-07)
+
+
+### Features
+
+* Improve Privacy Manifest support for iOS 17 ([#25](https://github.com/mparticle-integrations/mparticle-apple-integration-leanplum/issues/25)) ([d3000a5](https://github.com/mparticle-integrations/mparticle-apple-integration-leanplum/commit/d3000a5b7c4ab0f9f5e84e0a6e5825042dab5f11))
+
 # [8.4.0](https://github.com/mparticle-integrations/mparticle-apple-integration-leanplum/compare/v8.3.0...v8.4.0) (2024-04-10)
 
 

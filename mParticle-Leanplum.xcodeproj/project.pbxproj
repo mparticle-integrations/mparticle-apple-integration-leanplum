@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,8 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		535B24AB285798AF003141C8 /* Leanplum.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Leanplum.xcframework; path = Carthage/Build/Leanplum.xcframework; sourceTree = "<group>"; };
-		535B24AD285798B5003141C8 /* mParticle_Apple_SDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mParticle_Apple_SDK.xcframework; path = Carthage/Build/mParticle_Apple_SDK.xcframework; sourceTree = "<group>"; };
+		535B24AB285798AF003141C8 /* Leanplum.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:4XLWYATZ5P:Leanplum, Inc."; lastKnownFileType = wrapper.xcframework; name = Leanplum.xcframework; path = Carthage/Build/Leanplum.xcframework; sourceTree = "<group>"; };
+		535B24AD285798B5003141C8 /* mParticle_Apple_SDK.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:DLD43Y3TRP:mParticle, inc"; lastKnownFileType = wrapper.xcframework; name = mParticle_Apple_SDK.xcframework; path = Carthage/Build/mParticle_Apple_SDK.xcframework; sourceTree = "<group>"; };
 		537FB0DF284AB1BF0097D765 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		53E9ACCA2BBF0E540062A03A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DB7E05A41CB819D300967FDF /* MPKitLeanplum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitLeanplum.h; sourceTree = "<group>"; };

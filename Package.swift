@@ -12,10 +12,10 @@ let package = Package(
     dependencies: [
       .package(name: "mParticle-Apple-SDK",
                url: "https://github.com/mParticle/mparticle-apple-sdk",
-               .upToNextMajor(from: "8.7.0")),
+               .upToNextMajor(from: "8.22.0")),
       .package(name: "Leanplum",
                url: "https://github.com/leanplum/leanplum-ios-sdk",
-               .upToNextMajor(from: "6.1.0")),
+               .upToNextMajor(from: "6.4.2")),
     ],
     targets: [
         .target(
@@ -23,6 +23,7 @@ let package = Package(
             dependencies: ["mParticle-Apple-SDK","Leanplum"],
             path: "mParticle-Leanplum",
             exclude: ["File.swift", "Info.plist"],
+            resources: [.process("PrivacyInfo.xcprivacy")],
             publicHeadersPath: ".",
             cSettings: [
                 .headerSearchPath("."),

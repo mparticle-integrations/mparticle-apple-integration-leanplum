@@ -15,12 +15,7 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = "9.0"
     s.ios.source_files      = 'mParticle-Leanplum/*.{h,m,mm}'
-    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 8.0'
-    s.ios.dependency 'Leanplum-iOS-SDK', '~> 6.1'
-    s.ios.frameworks = 'CFNetwork', 'SystemConfiguration', 'Security', 'CoreLocation', 'StoreKit'
-    s.ios.weak_frameworks = 'AdSupport'
-    s.ios.pod_target_xcconfig = {
-        'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/Leanplum-iOS-SDK/**',
-        'OTHER_LDFLAGS' => '$(inherited) -framework "Leanplum"'
-    }
+    s.ios.resource_bundles  = { 'mParticle-Leanplum-Privacy' => ['mParticle-Leanplum/PrivacyInfo.xcprivacy'] }
+    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 8.22'
+    s.ios.dependency 'Leanplum-iOS-SDK', '~> 6.4'
 end
